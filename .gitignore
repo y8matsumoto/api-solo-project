@@ -1,6 +1,8 @@
 .DS_Store
 /dist
 
+config.js
+
 /test/e2e/reports/
 selenium-debug.log
 
