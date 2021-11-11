@@ -60,6 +60,13 @@ exports.seed = function(knex, Promise) {
           best_score: 93,
           last_score: 93,
           memo: "Enjoy resort golf!!!"
+        },
+        {
+          name: "Hokkaido Country Club",
+          place: "Hokkaido",
+          best_score: 72,
+          last_score: 72,
+          memo: "Par play!!!"
         }
       ]);
     });

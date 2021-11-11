@@ -47,43 +47,43 @@ describe("Golf API Server", () => {
     });
   });
 
-  // describe("POST /api/golf - endpoint", () => {
-  //   it("should return added course", async () => {
-  //     const expected = {
-  //       "name": "Daystar Golf Club",
-  //       "place": "Chiba",
-  //       "best_score": 93,
-  //       "last_score": 93,
-  //       "memo": "Close soon. Good bye Daystar."
-  //     }
-  //     const res = await request.post("/api/golf").send(expected);
-  //     // Assert
-  //     res.should.be.json;
-  //     res.should.have.status(200);
-  //   });
-  // });
+  describe("POST /api/golf - endpoint", () => {
+    it("should return added course", async () => {
+      const expected = {
+        name: "Aquarline Golf Club",
+        place: "Chiba",
+        best_score: 92,
+        last_score: 94,
+        memo: "Just like beach sand."
+      };
+      const res = await request.post("/api/golf").send(expected);
+      // Assert
+      res.should.be.json;
+      res.should.have.status(200);
+    });
+  });
 
-  // describe("PATCH /api/golf/:name - endpoint", () => {
-  //   it("should return changed course", async () => {
-  //     const expected = {
-  //       name: "Chisan Fuji Country",
-  //       place: "Shizuoka",
-  //       best_score: 97,
-  //       last_score: 100,
-  //       memo: "Always back tee. Battery Green."
-  //     };
-  //     const res = await request
-  //       .patch("/api/golf/Chisan Fuji Country")
-  //       .send(expected);
-  //     // Assert
-  //     res.should.have.status(200);
-  //     res.should.be.json;
-  //   });
-  // });
+  describe("PATCH /api/golf/:name - endpoint", () => {
+    it("should return changed course", async () => {
+      const expected = {
+        name: "Chisan Fuji Country",
+        place: "Shizuoka",
+        best_score: 90,
+        last_score: 100,
+        memo: "Always back tee. Battery Green."
+      };
+      const res = await request
+        .patch("/api/golf/Chisan Fuji Country")
+        .send(expected);
+      // Assert
+      res.should.have.status(200);
+      res.should.be.json;
+    });
+  });
 
   describe("DELETE /api/golf/:name - endpoint", () => {
     it("should return changed course", async () => {
-      const res = await request.delete("/api/golf/Hoge");
+      const res = await request.delete("/api/golf/Hokkaido Country Club");
 
       // Assert
       res.should.have.status(200);
