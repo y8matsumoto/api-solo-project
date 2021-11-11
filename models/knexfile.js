@@ -1,5 +1,5 @@
 // Update with your config settings.
-const config = require("../config");
+const config = require("../src/config");
 
 module.exports = {
   client: "pg",

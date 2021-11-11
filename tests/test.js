@@ -1,89 +1,30 @@
-/* eslint-disable no-console */
-const { expect, assert } = require("chai");
-const config = require("../config");
-const knex = require("knex")(config.db);
-// const models = require("../index")(knex);
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+chai.use(chaiHttp);
+const { setupServer } = require("../src/server");
 
-const forcePromiseReject = () => {
-  throw new Error("This promise should have failed, but did not.");
-};
+// this enables us to use .should assertions instead of expecct. Personal Preference
+chai.should();
 
-describe("users", () => {
-  describe("setup", () => {
-    it("able to connect to database", () =>
-      knex
-        .raw("select 1+1 as result")
-        .catch(() => assert.fail("unable to connect to db")));
+/*
+ * This sprint you will have to create all tests yourself, TDD style.
+ * For this you will want to get familiar with chai-http https://www.chaijs.com/plugins/chai-http/
+ * The same kind of structure that you encountered in lecture.express will be provided here.
+ */
+const server = setupServer();
 
-    it("has run the initial migrations", () =>
-      knex("users")
-        .select()
-        .catch(() => assert.fail("users table is not found.")));
+describe("Golf API Server", () => {
+  let request;
+
+  beforeEach(() => {
+    request = chai.request(server);
   });
 
-  describe("#create", () => {
-    let params = { username: "" };
-
-    context("when bad params are given", () => {
-      before(() => {
-        params = { username: " " };
-      });
-
-      it("politely refuses", () =>
-        models.users
-          .create(params)
-          .then(forcePromiseReject)
-          .catch(err =>
-            expect(err.message).to.equal(
-              "Username must be provided, and be at least two characters"
-            )
-          ));
+  describe("GET /api/golf - modifying data", () => {
+    it("should return valid data with limit", async () => {
+      const res = await request.get("/api/golf");
+      // Assert
+      res.should.have.status(200);
     });
-
-    context("when good params are given", () => {
-      before(() => {
-        params.username = "rp-3";
-      });
-
-      afterEach(() => knex("users").del()); // delete all users after each spec
-
-      it("creates a user", () =>
-        models.users.create(params).then(user => {
-          expect(user).to.include({ username: params.username });
-          expect(user.id).to.be.a("number");
-        }));
-
-      context("when a duplicate username is provided", () => {
-        beforeEach(() => models.users.create(params));
-
-        it("generates a sanitized error message", () =>
-          models.users
-            .create(params)
-            .then(forcePromiseReject)
-            .catch(err =>
-              expect(err.message).to.equal("That username already exists")
-            ));
-      });
-    });
-    // });
-
-    // describe("#list", () => {
-    //   const usernames = ["rp-3", "muddybarefeet"];
-    //   const users = usernames.map(username => ({ username }));
-    //   before(() => Promise.all(users.map(models.users.create)));
-    //   after(() => knex("users").del());
-
-    //   it("lists all users", () =>
-    //     models.users.list().then(resp => {
-    //       expect(usernames).to.include(resp[0].username);
-    //       expect(usernames).to.include(resp[1].username);
-    //     }));
-
-    //   it("returns serializable objects", () =>
-    //     models.users.list().then(resp => {
-    //       expect(resp[0].serialize).to.be.a("function");
-    //       expect(resp[0].serialize().id).to.be.a("number");
-    //       expect(resp[0].serialize().username).to.be.a("string");
-    //     }));
   });
 });
