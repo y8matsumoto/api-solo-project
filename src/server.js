@@ -30,7 +30,7 @@ const setupServer = () => {
       .select()
       .from("courses")
       .then(result => {
-        res.send(result);
+        res.send(result[0]);
       });
   });
 
@@ -46,6 +46,53 @@ const setupServer = () => {
       .then(result => {
         res.send(result);
       });
+  });
+
+  app.post("/api/golf", (req, res) => {
+    const { name, place, best_score, last_score, memo } = req.body;
+    console.log(name);
+    res.status(200);
+
+    knex("courses")
+      .insert({
+        name: name,
+        place: place,
+        best_score: best_score,
+        last_score: last_score,
+        memo: memo
+      })
+      .then(() => {
+        return knex("courses")
+          .where({
+            name: name
+          })
+          .select();
+      })
+      .then(course => res.send(course[0]));
+  });
+
+  app.patch("/api/golf/:name", (req, res) => {
+    const { name } = req.params;
+    const { name: updateName, place, best_score, last_score, memo } = req.body;
+    console.log(updateName);
+    res.status(200);
+    knex("courses")
+      .where({ name: name })
+      .update({
+        name: updateName,
+        place: place,
+        best_score: best_score,
+        last_score: last_score,
+        memo: memo
+      })
+      .then(() => {
+        return knex("courses")
+          .where({
+            name: name
+          })
+          .select();
+      })
+      .then(course => res.send(course[0]));
   });
 
   return app;

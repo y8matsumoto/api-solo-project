@@ -46,4 +46,38 @@ describe("Golf API Server", () => {
       res.should.be.json;
     });
   });
+
+  // describe("POST /api/golf - endpoint", () => {
+  //   it("should return added course", async () => {
+  //     const expected = {
+  //       "name": "Daystar Golf Club",
+  //       "place": "Chiba",
+  //       "best_score": 93,
+  //       "last_score": 93,
+  //       "memo": "Close soon. Good bye Daystar."
+  //     }
+  //     const res = await request.post("/api/golf").send(expected);
+  //     // Assert
+  //     res.should.be.json;
+  //     res.should.have.status(200);
+  //   });
+  // });
+
+  describe("PATCH /api/golf/:name - endpoint", () => {
+    it("should return changed course", async () => {
+      const expected = {
+        name: "Chisan Fuji Country",
+        place: "Shizuoka",
+        best_score: 96,
+        last_score: 100,
+        memo: "Always back tee. Battery Green."
+      };
+      const res = await request
+        .patch("/api/golf/Chisan Fuji Country")
+        .send(expected);
+      // Assert
+      res.should.have.status(200);
+      res.should.be.json;
+    });
+  });
 });
