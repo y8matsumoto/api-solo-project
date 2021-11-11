@@ -101,7 +101,7 @@ npm start
 
 - `GET /api/golf`
   - 登録されている全ゴルフ場を配列で返却します。
-- `POST /api/golf/:name`
+- `GET /api/golf/:name`
   - 指定した名前のゴルフ場の登録データを返却します。
 - `GET /api/golf/placeList/:place`
   - 指定した都道府県(place)の、登録されているゴルフ場一覧を返却します。
