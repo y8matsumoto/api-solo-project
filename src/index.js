@@ -9,4 +9,4 @@ server.listen(PORT, () => {
   console.log("Server listening on Port", PORT);
 });
 
-const knex = require("knex")(config.db);
+// const knex = require("knex")(config.db);

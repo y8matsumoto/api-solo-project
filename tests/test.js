@@ -21,10 +21,29 @@ describe("Golf API Server", () => {
   });
 
   describe("GET /api/golf - modifying data", () => {
-    it("should return valid data with limit", async () => {
+    it("should return all course", async () => {
       const res = await request.get("/api/golf");
       // Assert
       res.should.have.status(200);
+      res.should.be.json;
+    });
+  });
+
+  describe("GET /api/golf/:name - modifying data", () => {
+    it("should return a course", async () => {
+      const res = await request.get("/api/golf/Daichiba country Club");
+      // Assert
+      res.should.have.status(200);
+      res.should.be.json;
+    });
+  });
+
+  describe("GET /api/golf/placeList/:place - modifying data", () => {
+    it("should return a course", async () => {
+      const res = await request.get("/api/golf/Daichiba country Club");
+      // Assert
+      res.should.have.status(200);
+      res.should.be.json;
     });
   });
 });
