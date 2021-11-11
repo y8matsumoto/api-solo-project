@@ -50,7 +50,6 @@ const setupServer = () => {
 
   app.post("/api/golf", (req, res) => {
     const { name, place, best_score, last_score, memo } = req.body;
-    console.log(name);
     res.status(200);
 
     knex("courses")
@@ -93,6 +92,23 @@ const setupServer = () => {
           .select();
       })
       .then(course => res.send(course[0]));
+  });
+
+  app.delete("/api/golf/:name", (req, res) => {
+    const { name } = req.params;
+    knex("courses")
+      .where({
+        name: name
+      })
+      .del()
+      .then(() => {
+        return knex
+          .select()
+          .from("courses")
+          .then(result => {
+            res.send(result);
+          });
+      });
   });
 
   return app;
