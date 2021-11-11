@@ -11,6 +11,8 @@
     "makeMigrate": "knex migrate:make --knexfile models/knexfile.js",
     "migrate": "knex migrate:latest --knexfile models/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile models/knexfile.js ",
+    "makeSeed": "knex seed:make --knexfile models/knexfile.js",
+    "seed": "knex seed:run --knexfile models/knexfile.js",
     "precommit": "pretty-quick --staged"
   },
   "author": "Code Chrysalis",
