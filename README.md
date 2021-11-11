@@ -39,9 +39,51 @@ module.exports = {
 npm start
 ```
 
+**前提**
+次のコマンドを実行して、このプロジェクトのデータベースを作成しましょう：
+
+```bash
+  echo "CREATE DATABASE golf;" | psql
+```
+
+マイグレーションを実行し、データベースをセットアップするには：
+
+```bash
+  npm run migrate
+```
+
+マイグレーションをロールバックするには：
+
+```bash
+  npm run rollback
+```
+
+テスト用のデータをテーブルに投入するには：
+
+```bash
+  npm run seed
+```
+
+テストを実行するには：
+
+```bash
+  npm run test
+```
+
+アプリを実行するには：
+
+```bash
+  npm run start
+```
+
+開発時にアプリを実行するには：
+
+```bash
+  npm run dev
+```
+
 ## API 一覧
 
-**前提**
 ゴルフ場オブジェクトは下記の形式です。
 
 ```js
