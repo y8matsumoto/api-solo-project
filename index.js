@@ -1,3 +1,6 @@
+//server.jsのrequire
+const { setupServer } = require("./server");
+
 // アプリのグローバル設定
 const config = require("./config");
 
