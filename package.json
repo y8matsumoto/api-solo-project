@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node tests/initialize.js && mocha tests/test.js && npm run lint",
     "lint": "eslint --fix .",
-    "start": "node index.js",
+    "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
     "makeMigrate": "knex migrate:make --knexfile models/knexfile.js",
     "migrate": "knex migrate:latest --knexfile models/knexfile.js",
